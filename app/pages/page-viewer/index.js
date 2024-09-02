@@ -8,12 +8,6 @@ import {Page} from '@salesforce/commerce-sdk-react/components'
 import {
     ImageTile,
     ImageWithText, 
-    ProductTile, 
-    EditorialRichText, 
-    MainBanner, 
-    CategoryTile, 
-    StaticContent,
-    TextWithImage
 } from '../../page-designer/assets'
 import {
     Carousel,
@@ -22,8 +16,7 @@ import {
     MobileGrid2r2c,
     MobileGrid2r3c,
     MobileGrid3r1c,
-    MobileGrid3r2c,
-    textWidthImage,
+    MobileGrid3r2c
     
 } from '../../page-designer/layouts'
 
