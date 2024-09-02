@@ -46,7 +46,12 @@ const StoreLocator = loadable(() => import('./pages/store-locator'), {
 const Wishlist = loadable(() => import('./pages/account/wishlist'), {
     fallback
 })
+
 const PageNotFound = loadable(() => import('./pages/page-not-found'))
+const PageViewer = loadable(() => import('./pages/page-viewer'), {fallback})
+const ContentSearch = loadable(() => import('./pages/content-search'), {fallback})
+const Content = loadable(() => import('./pages/content'), {fallback})
+const MarketPlaceStore = loadable(() => import('./pages/marketplace'), {fallback})
 
 export const routes = [
     {
@@ -111,6 +116,23 @@ export const routes = [
     {
         path: '/store-locator',
         component: StoreLocator
+    },
+    {
+        path: '/page-viewer/:pageId',
+        component: PageViewer
+    },
+    {
+        path: '/content-search',
+        component: ContentSearch
+    },
+    {
+        path: '/content/:id',
+        component: Content
+    },
+    {
+        path: '/marketplace',
+        component: MarketPlaceStore,
+        exact: true
     },
     {
         path: '*',
