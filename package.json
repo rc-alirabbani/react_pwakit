@@ -36,12 +36,15 @@
   ],
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/react": "^2.6.0",
+    "@chakra-ui/react": "^2.8.2",
     "@chakra-ui/skip-nav": "^2.0.15",
     "@chakra-ui/system": "^2.5.6",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@formatjs/cli": "^6.0.4",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@lhci/cli": "^0.11.0",
     "@loadable/component": "^5.15.3",
     "@peculiar/webcrypto": "^1.4.2",
@@ -60,8 +63,9 @@
     "card-validator": "^8.1.1",
     "cross-env": "^5.2.1",
     "cross-fetch": "^3.1.4",
+    "dotenv": "^16.4.5",
     "focus-visible": "^5.2.0",
-    "framer-motion": "^10.12.9",
+    "framer-motion": "^10.18.0",
     "full-icu": "^1.5.0",
     "helmet": "^4.6.0",
     "jest-fetch-mock": "^2.1.2",
@@ -81,7 +85,9 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.9",
     "react-intl": "^5.25.1",
-    "react-router-dom": "^5.3.4"
+    "react-router-dom": "^5.3.4",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.1"

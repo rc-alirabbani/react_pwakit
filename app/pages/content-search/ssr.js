@@ -12,7 +12,9 @@ import {getRuntime} from '@salesforce/pwa-kit-runtime/ssr/server/express'
 import {defaultPwaKitSecurityHeaders} from '@salesforce/pwa-kit-runtime/utils/middleware'
 import {getConfig} from '@salesforce/pwa-kit-runtime/utils/ssr-config'
 import helmet from 'helmet'
-require('dotenv').config()
+import axios from 'axios'
+import {getAppOrigin} from '@salesforce/pwa-kit-react-sdk/utils/url'
+import bodyParser from 'body-parser'
 
 const options = {
     // The build directory (an absolute path)
@@ -30,14 +32,7 @@ const options = {
     // The protocol on which the development Express app listens.
     // Note that http://localhost is treated as a secure context for development,
     // except by Safari.
-    protocol: 'http',
-
-    // Option for whether to set up a special endpoint for handling
-    // private SLAS clients
-    // Set this to false if using a SLAS public client
-    // When setting this to true, make sure to also set the PWA_KIT_SLAS_CLIENT_SECRET
-    // environment variable as this endpoint will return HTTP 501 if it is not set
-    useSLASPrivateClient: true
+    protocol: 'http'
 }
 
 const runtime = getRuntime()
@@ -80,6 +75,27 @@ const {handler} = runtime.createHandler(options, (app) => {
 
     app.get('/worker.js(.map)?', runtime.serveServiceWorker)
     app.get('*', runtime.render)
+    
+    //custom routes
+    let clientID = '9109870b-d469-4be4-b035-03c7c204d6dd'
+
+    app.post('/contentSearch', async (req, res) => {
+        var origin = await getAppOrigin();
+        var resp = await axios.get(`
+            ${origin}/mobify/proxy/ocapi/s/RefArch/dw/shop/v20_2/content_search?q=about&client_id=${clientID}`)
+        console.log(resp)
+        res.send(resp.data)
+    })
+    app.post('/contentDetails', bodyParser.json(), async (req, res) => {
+        var origin = await getAppOrigin()
+        try {
+            var resp = await axios.get(`${origin}/mobify/proxy/ocapi/s/RefArch/dw/shop/v20_2/content/${req.body.id}?client_id=${clientID}`)
+            res.send(resp.data)
+        } catch (e) {
+            console.log('ERROR: ', e)
+            res.send({fault: {message: `Requested content with ID ${req.body.id} found`}})
+        }
+    })
 })
 // SSR requires that we export a single handler function called 'get', that
 // supports AWS use of the server that we created above.
